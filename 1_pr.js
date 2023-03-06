@@ -3,12 +3,27 @@ var divFigure = '<div id = "f$coord" class = "figure">$figure</div>';
 
 $(function(){
     createBoard();
-    showFigures('wwwwwwwwwwwwwwww11111111111111111111111111111111bbbbbbbbbbbbbbbb');
+    showFigures('1w1w1w1ww1w1w1w1111111111111111111111111111111111b1b1b1bb1b1b1b1');
     setDraggable();
+    setDroppable();
 })
 
 function setDraggable(){
     $('.figure').draggable();
+}
+
+function setDroppable(){
+    $('.figure').droppable({
+        drop: function(envent, ui){
+            var frCoord = ui.draggable.attr('id').substring(1);
+            var toCoord = this.id.substring(1);
+            moveFigure(frCoord, toCoord);
+        }
+    });
+}
+
+function moveFigure(frCoord, toCoord){
+
 }
 
 function createBoard() {
@@ -36,8 +51,8 @@ function showFigureAt(coord, figure){
 
 function getCheckersSymbol(figure){
     switch(figure){
-        case 'w' : return '&#128656;';
-        case 'b' : return '&#128659;';
+        case 'w' : return '&#127761;';
+        case 'b' : return '&#127765;';
         default : return '';
     }
 }
